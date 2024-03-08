@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Notify Team Hourly
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: 'Hey, chalg`imasdan, proyektingni qil!!! Orqada qolyapsan axir!!!'
+      # - name: Notify Team Hourly
+      #   uses: appleboy/telegram-action@master
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_TO }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: 'Hey, chalg`imasdan, proyektingni qil!!! Orqada qolyapsan axir!!!'
       
       - name: Notify on Push
         if: github.event_name == 'push'
