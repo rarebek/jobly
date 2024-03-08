@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Notify Team
-      uses: appleboy/telegram-action@v0.1.6
+      uses: appleboy/telegram-action@latest
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
