@@ -4,3 +4,6 @@
 [submodule "user-service/user-service/protos"]
 	path = user-service/user-service/protos
 	url = https://github.com/rarebek/protos.git
+[submodule "protos"]
+	path = protos
+	url = https://github.com/rarebek/protos.git
