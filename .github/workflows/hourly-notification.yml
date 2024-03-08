@@ -1,0 +1,17 @@
+name: Hourly Team Notification
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Executes every hour
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Notify Team
+      uses: appleboy/telegram-action@v0.1.6
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: 'This is your hourly reminder!'
