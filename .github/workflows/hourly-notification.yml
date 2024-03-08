@@ -1,23 +1,85 @@
-name: Hourly Team Notification
+name: GitHub Notifications
 
 on:
   schedule:
     - cron: '0 * * * *'  # Executes every hour
-
   workflow_dispatch:
-
   push:
     branches:
-    - master
+      - master
+  pull_request:
+  issues:
+  issue_comment:
+  pull_request_review:
+  pull_request_review_comment:
+  repository_dispatch:
 
 jobs:
   notify:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Notify Team
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: 'Hey, chalg`imasdan, proyektingni qil!!! Orqada qolyapsan axir!!!'
+      - name: Notify Team Hourly
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Hey, chalg`imasdan, proyektingni qil!!! Orqada qolyapsan axir!!!'
+      
+      - name: Notify on Push
+        if: github.event_name == 'push'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'A push event has occurred on branch ${{ github.ref }} by ${{ github.actor }}.'
+
+      - name: Notify on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Pull Request ${{ github.event.action }} by ${{ github.actor }}.'
+
+      - name: Notify on Issue
+        if: github.event_name == 'issues'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Issue ${{ github.event.action }} by ${{ github.actor }}.'
+
+      - name: Notify on Issue Comment
+        if: github.event_name == 'issue_comment'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Issue Comment ${{ github.event.action }} by ${{ github.actor }}.'
+
+      - name: Notify on Pull Request Review
+        if: github.event_name == 'pull_request_review'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Pull Request Review ${{ github.event.action }} by ${{ github.actor }}.'
+
+      - name: Notify on Pull Request Review Comment
+        if: github.event_name == 'pull_request_review_comment'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Pull Request Review Comment ${{ github.event.action }} by ${{ github.actor }}.'
+
+      - name: Notify on Repository Dispatch
+        if: github.event_name == 'repository_dispatch'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 'Repository Dispatch ${{ github.event.action }} by ${{ github.actor }}.'
+
+      # Add more notifications for other events as needed
