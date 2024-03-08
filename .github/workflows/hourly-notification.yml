@@ -20,4 +20,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: 'This is your hourly reminder!'
+        message: 'Hey, chalg`imasdan, proyektingni qil!!! Orqada qolyapsan axir!!!'
